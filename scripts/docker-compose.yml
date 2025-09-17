@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  n8n-metrics-exporter:
+    build:
+      context: .
+      dockerfile: ../Dockerfile
+    container_name: n8n-metrics-exporter
+    restart: unless-stopped
+    environment:
+      - N8N_API_URL=https://n8n.k8s.2gis.dev # Адрес N8N API, укажите правильный адрес вашего сервера N8N
+      - N8N_API_KEY=${N8N_API_KEY}           # Берётся из переменной окружения хоста
+      - METRICS_PORT=9100                    # Порт для экспорта метрик Prometheus
+      - N8N_API_SCRAPE_INTERVAL=15           # Интервал сбора метрик в секундах
+      - LOG_LEVEL=DEBUG                      # Уровень логирования (DEBUG, INFO, WARNING, ERROR)
+    ports:
+      - "9100:9100"                          # Отображение порта для экспорта метрик

@@ -1,0 +1,7 @@
+# Git ignore for n8n metrics exporter
+.env
+__pycache__/
+*.py[cod]
+*$py.class
+.DS_Store
+.idea/
